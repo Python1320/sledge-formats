@@ -92,5 +92,7 @@
         AnimGraphEnum, // Source 2 (cs2)
         Cpp, // Source 2
         CollisionProperty, // Source 2
+        Api, // Source2 (cs2)
+        Animgraph2Identifier, // Source2 (cs2)
     }
 }
