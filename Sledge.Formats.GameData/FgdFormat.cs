@@ -33,6 +33,9 @@ namespace Sledge.Formats.GameData
             Symbols.Ampersand,
             Symbols.Minus,
             Symbols.Greater,
+
+            // For Source's (*type) resource syntax, e.g. model(*studio)
+            Symbols.Star,
         };
 
         private static readonly Tokeniser Tokeniser = new Tokeniser(ValidSymbols);
@@ -873,6 +876,12 @@ namespace Sledge.Formats.GameData
         {
             var token = it.Current;
             Debug.Assert(token != null, nameof(token) + " != null");
+
+            // Support Source's (*type) resource syntax, e.g. model(*studio), message(*sound)
+            if (it.Current?.Is(TokenType.Symbol, Symbols.Star) == true)
+            {
+                it.MoveNext();
+            }
 
             var type = TokenParsing.Expect(it, TokenType.Name).Value;
 
